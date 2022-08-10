@@ -1,0 +1,46 @@
+* {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 14px;
+    list-style: none;
+}
+
+body {
+    background-color: #333;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.container-fluid {
+    color: #FFF;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.alert-hour {
+    animation-name: alertable;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes alertable {
+    from {
+        background-color: #333;
+    }
+    to {
+        background-color: #D41414;
+    }
+}

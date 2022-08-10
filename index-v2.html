@@ -6,37 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="css/style.css">
+
 
     <title>Checklist - Live</title>
-
-    <style>
-        * {
-            font-family: 'Exo 2', sans-serif;
-            font-size: 15px;
-            list-style: none;
-            background-color: #333;
-            color: #FFF;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-        }
-        
-        h2 {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-    </style>
 </head>
 
-<body>
+<body id="checklist">
     <div class="container-fluid">
-        <h1 class="m-3 text-center">Checklist - Live</h1>
+        <div class="header m-3">
+            <h1>Checklist - Live</h1>
+            <div class="d-flex flex-column justify-content-end">
+                <span id="hoje"></span>
+                <span id="timer"></span>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-3">
                 <h2>Configuração Inicial</h2>
@@ -69,140 +56,32 @@
             </div>
 
             <div class="col-md-3">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Alertar às</label>
+                        <input type="time" class="form-control" id="alertarAs">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold d-block">Ações</label>
+                        <button class="btn btn-primary" id="btnPararAlerta">Parar Alerta</button>
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <label class="form-label fw-bold">Versículos/Louvores</label>
                     <textarea class="form-control" rows="7"></textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold">Observações</label>
-                    <textarea class="form-control" rows="10"></textarea>
+                    <textarea class="form-control" rows="7"></textarea>
                 </div>
             </div>
         </div>
 
     </div>
-
-    <script>
-        const configInicial = {
-            id: 'ConfigInicial',
-            todo: ['Ligar Projetor',
-                'Ligar TV',
-                'Confirmar louvores com os músicos',
-                'Ligar câmera',
-                'Verificar conexão com internet',
-                'Abrir OBS',
-                'Abrir Holyrics'
-            ]
-        }
-
-        const prepararOBS = {
-            id: 'PrepararOBS',
-            todo: [
-                'Canal Captura de Entrada de Áudio',
-                'Projetar tela do OBS',
-                'Atualizar cache do Holyrics',
-                'Atualizar cache de Imagem'
-            ]
-        }
-
-        const prepararHolyrics = {
-            id: 'PrepararHolyrics',
-            todo: [
-                'Versículo',
-                'Louvores (Caso não tenha o louvor, pesquisar com Ctrl + Shift + H)',
-                'Louvores com até 3 linhas',
-                'Checar se louvores é exibido',
-                'Flyers/Vídeos'
-            ]
-        }
-
-        const prepararTransmissao = {
-            id: 'PrepararTransmissao',
-            todo: [
-                'Abrir transmissão do Youtube',
-                'Adicionar título',
-                'Adicionar biolink',
-                'Atualizar thumbnail',
-                'Privacidade - Público',
-                'Posicionar câmera em quem dará abertura'
-            ]
-        }
-
-        const minutos5 = {
-            id: '5Minutos',
-            todo: [
-                'Esmaecer para preto',
-                'Iniciar Transmissão no OBS',
-                'Esmarcer para iniciar o timer',
-                'Verificar se transmissão iniciou',
-                'Divulgar link da transmissão (Estamos Online: https://www.youtube.com/c/ibasjbv/live)',
-                'Trocar bateria da câmera',
-                'Colocar a bateria inicial para carregar'
-            ]
-        }
-
-        const abertura = {
-            id: 'Abertura',
-            todo: [
-                'Exibir o nome do pregador por 30 segundos',
-                'Verificar qualidade da transmissão no celular'
-            ]
-        }
-
-        const dizimo = {
-            id: 'Dizimo',
-            todo: [
-                'Ao iniciar louvor, exibir dados bancários',
-                'Após oração, remover dados bancários'
-            ]
-        }
-
-        const encerrarTransmissao = {
-            id: 'EncerrarTransmissao',
-            todo: [
-                'Esmaecer para preto',
-                'Interromper transmissão no OBS',
-                'Encerrar transmissão no Youtube',
-                'Desligar câmera',
-                'Coloca bateria para carregar',
-                'Remover louvores do favoritos',
-                'Remover versículos do favoritos',
-                'Fechar Holyrics', 'Fechar OBS',
-                'Fechar Youtube'
-            ]
-        }
-
-        const todos = [
-            configInicial,
-            prepararOBS,
-            prepararHolyrics,
-            prepararTransmissao,
-            minutos5,
-            abertura,
-            dizimo,
-            encerrarTransmissao
-        ]
-
-        todos.forEach(item => inserirItemDoChecklist(item))
-
-        function inserirItemDoChecklist(obj) {
-            const element = document.getElementById(obj.id);
-
-            obj.todo.forEach(item => element.innerHTML += `
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox">${item}
-                </label>
-            </div>`)
-        }
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <script>
-        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-    </script>
-
+    <script src="lib/moment-locales.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
