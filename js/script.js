@@ -6,14 +6,28 @@ moment.locale('pt-br')
 
 const configInicial = {
     id: 'ConfigInicial',
-    todo: [
-        'Ligar Projetor',
-        'Ligar TV',
-        'Confirmar sequência de louvores',
-        'Ligar câmera',
-        'Verificar conexão com internet',
-        'Abrir OBS',
-        'Abrir Holyrics'
+    todo: [{
+            title: 'Ligar Projetor',
+            popover: 'Controle no altar'
+        },
+        {
+            title: 'Ligar TV',
+        },
+        {
+            title: 'Confirmar sequência de louvores',
+        },
+        {
+            title: 'Ligar câmera',
+        },
+        {
+            title: 'Verificar conexão com internet',
+        },
+        {
+            title: 'Abrir OBS',
+        },
+        {
+            title: 'Abrir Holyrics'
+        }
     ]
 }
 
@@ -129,16 +143,26 @@ function inserirItemDoChecklist(obj) {
     obj.todo.forEach(item => element.innerHTML += `
         <div class="form-check">
             <label class="form-check-label">
-                <input class="form-check-input" type="checkbox">${item}
+                <input class="form-check-input" type="checkbox">  
+                ${item.title ? item.title : item}
             </label>
+            ${item.popover ? `
+            <i class="fa-solid fa-link"
+                data-bs-toggle="popover" 
+                data-bs-title="Informação"
+                data-bs-content="${item.popover}">
+                </i>` : ''
+            }
         </div>`)
 }
+
+
 
 function verificarEAplicarAlerta() {
     let horarioAtual = moment().format('HH:mm')
     let horarioDoAlerta = alertarAs.value
 
-    if (horarioDoAlerta == '' || horarioDoAlerta == null)
+    if (horarioDoAlerta == '')
         return false
 
     if (horarioAtual >= horarioDoAlerta)
