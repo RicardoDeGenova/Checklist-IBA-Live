@@ -66,14 +66,29 @@ const prepararTransmissao = {
 
 const minutos5 = {
     id: '5Minutos',
-    todo: [
-        'Esmaecer para preto',
-        'Iniciar Transmissão no OBS',
-        'Esmarcer para iniciar o timer',
-        'Verificar se transmissão iniciou',
-        'Divulgar link da transmissão (Estamos Online: https://www.youtube.com/c/ibasjbv/live)',
-        'Trocar bateria da câmera',
-        'Colocar a bateria inicial para carregar'
+    todo: [{
+            title: 'Esmaecer para preto',
+        },
+        {
+            title: 'Iniciar Transmissão no OBS',
+        },
+        {
+            title: 'Esmarcer para iniciar o timer',
+        },
+        {
+            title: 'Verificar se transmissão iniciou',
+        },
+        {
+            title: 'Divulgar link da transmissão',
+            popover: 'Estamos Online: https://www.youtube.com/c/ibasjbv/live'
+        },
+        {
+            title: 'Trocar bateria da câmera',
+        },
+
+        {
+            title: 'Colocar a bateria inicial para carregar'
+        }
     ]
 }
 
@@ -142,21 +157,29 @@ function inserirItemDoChecklist(obj) {
 
     obj.todo.forEach(item => element.innerHTML += `
         <div class="form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" type="checkbox">  
-                ${item.title ? item.title : item}
-            </label>
-            ${item.popover ? `
-            <i class="fa-solid fa-link"
-                data-bs-toggle="popover" 
-                data-bs-title="Informação"
-                data-bs-content="${item.popover}">
-                </i>` : ''
-            }
+            ${renderizarTitle(item)}
+            ${renderizarPopover(item)}
         </div>`)
 }
 
+function renderizarTitle(item) {
+    return `<label class="form-check-label">
+            <input class="form-check-input" type="checkbox">  
+            ${item.title ? item.title : item}
+        </label>`
+}
 
+function renderizarPopover(item) {
+    if (item.popover)
+        return `
+        <i class="fa-solid fa-link"
+            data-bs-toggle="popover" 
+            data-bs-title="Informação"
+            data-bs-content="${item.popover}">
+        </i>`
+
+    return ''
+}
 
 function verificarEAplicarAlerta() {
     let horarioAtual = moment().format('HH:mm')
