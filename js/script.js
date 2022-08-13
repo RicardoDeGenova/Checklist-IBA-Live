@@ -134,7 +134,7 @@ const todos = [
     encerrarTransmissao
 ]
 
-todos.forEach(item => inserirItemDoChecklist(item))
+todos.forEach(item => renderizarItemDoChecklist(item))
 
 btnPararAlerta.addEventListener('click', () => {
     pararAlerta()
@@ -151,8 +151,7 @@ const displayTimer = setInterval(() => {
     verificarEAplicarAlerta()
 }, 1000)
 
-
-function inserirItemDoChecklist(obj) {
+function renderizarItemDoChecklist(obj) {
     const element = document.getElementById(obj.id);
 
     obj.todo.forEach(item => element.innerHTML += `
@@ -170,15 +169,12 @@ function renderizarTitle(item) {
 }
 
 function renderizarPopover(item) {
-    if (item.popover)
-        return `
+    return item.popover ? `
         <i class="fa-solid fa-link"
             data-bs-toggle="popover" 
-            data-bs-title="Informação"
             data-bs-content="${item.popover}">
-        </i>`
-
-    return ''
+        </i>` :
+        ''
 }
 
 function verificarEAplicarAlerta() {
