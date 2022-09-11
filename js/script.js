@@ -17,7 +17,7 @@ const configInicial = {
             title: 'Confirmar sequência de louvores',
         },
         {
-            title: 'Ligar câmera',
+            title: 'Ligar câmera (bateria SEM escrito)',
         },
         {
             title: 'Verificar conexão com internet',
@@ -83,7 +83,7 @@ const minutos5 = {
             popover: 'Estamos Online: https://www.youtube.com/c/ibasjbv/live'
         },
         {
-            title: 'Trocar bateria da câmera',
+            title: 'Trocar bateria da câmera (bateria COM escrito)',
         },
 
         {
