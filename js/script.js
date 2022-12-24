@@ -1,6 +1,7 @@
 const checklist = document.getElementById('checklist')
 const alertarAs = document.getElementById('alertarAs')
 const btnPararAlerta = document.getElementById('btnPararAlerta')
+
 let alertaRemovido = false;
 moment.locale('pt-br')
 
@@ -65,7 +66,7 @@ const prepararTransmissao = {
 }
 
 const minutos5 = {
-    id: '5Minutos',
+    id: 'CincoMinutos',
     todo: [{
             title: 'Esmaecer para preto',
         },
@@ -136,6 +137,18 @@ const todos = [
 
 todos.forEach(item => renderizarItemDoChecklist(item))
 
+const selecionarTodos = [...document.getElementsByClassName('select-input')]
+selecionarTodos.forEach(checkbox => {
+    checkbox.addEventListener('click', () => {
+        checkbox.checked ?
+            selecionarOuLimparTodosDoGrupo(checkbox, true) :
+            selecionarOuLimparTodosDoGrupo(checkbox, false)
+    })
+})
+
+
+
+
 btnPararAlerta.addEventListener('click', () => {
     pararAlerta()
 })
@@ -196,4 +209,13 @@ function aplicarAlerta() {
 function pararAlerta() {
     alertaRemovido = true;
     checklist.classList.remove('alert-hour')
+}
+
+function selecionarOuLimparTodosDoGrupo(e, value) {
+    const target = e.dataset.target
+    const elements = document.querySelectorAll(`#${target} input[type="checkbox"]`)
+
+    elements.forEach(checkbox => {
+        checkbox.checked = value
+    })
 }

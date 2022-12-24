@@ -36,6 +36,12 @@ h2 {
     animation-direction: alternate;
 }
 
+.select-all {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
 @keyframes alertable {
     from {
         background-color: #333;
