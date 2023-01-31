@@ -18,9 +18,6 @@ const configInicial = {
             title: 'Confirmar sequência de louvores',
         },
         {
-            title: 'Ligar câmera (bateria SEM escrito)',
-        },
-        {
             title: 'Verificar conexão com internet',
         },
         {
@@ -53,14 +50,33 @@ const prepararHolyrics = {
     ]
 }
 
-const prepararTransmissao = {
-    id: 'PrepararTransmissao',
+const data = new Date(Date.now());
+const cultoData =  data.toLocaleString().split(',')[0];
+
+const cultoTitulo = () => {
+    const day = (data.getDay() %7);
+    
+    return day === 1 ? 'Culto de Mulheres' : 
+    day === 6 ? 'Culto de Jovens' : 
+    'Culto da Família';
+}
+
+const prepararTransmissaoYt = {
+    id: 'PrepararTransmissaoYt',
     todo: [
         'Abrir transmissão do Youtube',
-        'Adicionar título',
-        'Adicionar biolink',
+        'Adicionar título: ' + cultoData + ' - ' + cultoTitulo(),
         'Atualizar thumbnail',
-        'Privacidade - Público',
+        'Privacidade - Público'
+    ]
+}
+
+const prepararTransmissaoFb = {
+    id: 'PrepararTransmissaoFb',
+    todo: [        
+        'Abrir transmissão do Facebook',
+        'Adicionar título: ' + cultoData + ' - ' + cultoTitulo(),
+        'Adicionar descrição (copiar do Youtube)',
         'Posicionar câmera em quem dará abertura'
     ]
 }
@@ -84,7 +100,7 @@ const minutos5 = {
             popover: 'Estamos Online: https://www.youtube.com/c/ibasjbv/live'
         },
         {
-            title: 'Trocar bateria da câmera (bateria COM escrito)',
+            title: 'Liga câmera (bateria SEM escrito)',
         },
 
         {
@@ -128,7 +144,8 @@ const todos = [
     configInicial,
     prepararOBS,
     prepararHolyrics,
-    prepararTransmissao,
+    prepararTransmissaoYt,
+    prepararTransmissaoFb,
     minutos5,
     abertura,
     dizimo,
@@ -145,9 +162,6 @@ selecionarTodos.forEach(checkbox => {
             selecionarOuLimparTodosDoGrupo(checkbox, false)
     })
 })
-
-
-
 
 btnPararAlerta.addEventListener('click', () => {
     pararAlerta()
@@ -168,7 +182,7 @@ function renderizarItemDoChecklist(obj) {
     const element = document.getElementById(obj.id);
 
     obj.todo.forEach(item => element.innerHTML += `
-        <div class="form-check">
+        <div class="form-check check-all">
             ${renderizarTitle(item)}
             ${renderizarPopover(item)}
         </div>`)
@@ -218,4 +232,45 @@ function selecionarOuLimparTodosDoGrupo(e, value) {
     elements.forEach(checkbox => {
         checkbox.checked = value
     })
+}
+
+
+const selecionarTodosOsMinimizers = [...document.getElementsByClassName('minimizerMaximizer')]
+selecionarTodosOsMinimizers.forEach(minimizerArrow => {
+    minimizerArrow.addEventListener('click', () => {        
+        console.log(minimizerArrow.innerHTML)
+
+        minimizerArrow.innerHTML === '↸' ?
+        minimizarOuMaximizarTodosDoGrupo(minimizerArrow, true) :
+        minimizarOuMaximizarTodosDoGrupo(minimizerArrow, false)
+    })
+})
+
+function minimizarOuMaximizarTodosDoGrupo(minimizerArrow, value){  
+    const isUpwardsArrow = minimizerArrow.innerHTML === '↸';    
+    const target = minimizerArrow.dataset.target;
+    const elements = document.querySelectorAll(`#${target} div[class^="form-check check-all"]`);
+    let shouldContinue = true;
+
+    elements.forEach(formDiv => {
+        const checkbox = formDiv.firstElementChild.firstElementChild;
+        if (!checkbox.checked) shouldContinue = false;
+    });
+    
+    if (!shouldContinue && isUpwardsArrow) return;
+
+    elements.forEach(formDiv => {
+        (isUpwardsArrow) ?
+        formDiv.classList.add('hide-checkbox') :        
+        formDiv.classList.remove('hide-checkbox');    
+    })
+
+    minimizerArrow.innerHTML = (isUpwardsArrow) ? '↘' : '↸' ;
+    clearSelection();
+}
+
+function clearSelection()
+{
+ if (window.getSelection) {window.getSelection().removeAllRanges();}
+ else if (document.selection) {document.selection.empty();}
 }
