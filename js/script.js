@@ -234,43 +234,27 @@ function selecionarOuLimparTodosDoGrupo(e, value) {
     })
 }
 
-
 const selecionarTodosOsMinimizers = [...document.getElementsByClassName('minimizerMaximizer')]
-selecionarTodosOsMinimizers.forEach(minimizerArrow => {
-    minimizerArrow.addEventListener('click', () => {        
-        console.log(minimizerArrow.innerHTML)
+selecionarTodosOsMinimizers.forEach(arrow => {
+    arrow.addEventListener('click', () => {
+        const target = arrow.dataset.target
+        const input = document.querySelector(`input[data-target="${target}"]`);
+        const isChecked = input.checked
 
-        minimizerArrow.innerHTML === '↸' ?
-        minimizarOuMaximizarTodosDoGrupo(minimizerArrow, true) :
-        minimizarOuMaximizarTodosDoGrupo(minimizerArrow, false)
+        minimizarOuMaximizarTodosDoGrupo(arrow, isChecked)
     })
 })
 
-function minimizarOuMaximizarTodosDoGrupo(minimizerArrow, value){  
-    const isUpwardsArrow = minimizerArrow.innerHTML === '↸';    
-    const target = minimizerArrow.dataset.target;
-    const elements = document.querySelectorAll(`#${target} div[class^="form-check check-all"]`);
-    let shouldContinue = true;
+function minimizarOuMaximizarTodosDoGrupo(arrow, isChecked) {
+    const maximizeIcon = '↸'
+    const minimizeIcon = '↘'
+    const form = document.getElementById(arrow.dataset.target)
 
-    elements.forEach(formDiv => {
-        const checkbox = formDiv.firstElementChild.firstElementChild;
-        if (!checkbox.checked) shouldContinue = false;
-    });
-    
-    if (!shouldContinue && isUpwardsArrow) return;
-
-    elements.forEach(formDiv => {
-        (isUpwardsArrow) ?
-        formDiv.classList.add('hide-checkbox') :        
-        formDiv.classList.remove('hide-checkbox');    
-    })
-
-    minimizerArrow.innerHTML = (isUpwardsArrow) ? '↘' : '↸' ;
-    clearSelection();
-}
-
-function clearSelection()
-{
- if (window.getSelection) {window.getSelection().removeAllRanges();}
- else if (document.selection) {document.selection.empty();}
+    if (isChecked) {
+        form.classList.add('hide-checkbox')
+        arrow.innerHTML = maximizeIcon
+    } else {
+        form.classList.remove('hide-checkbox')
+        arrow.innerHTML = minimizeIcon
+    }
 }
