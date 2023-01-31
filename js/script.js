@@ -50,10 +50,6 @@ const prepararHolyrics = {
     ]
 }
 
-
-const data = new Date(Date.now());
-const cultoData = data.toLocaleString().split(',')[0];
-
 const infoCulto = () => {
     const day = moment().day();
 
