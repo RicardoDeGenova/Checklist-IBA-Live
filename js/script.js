@@ -8,24 +8,24 @@ moment.locale('pt-br')
 const configInicial = {
     id: 'ConfigInicial',
     todo: [{
-            title: 'Ligar Projetor',
-            popover: 'Controle no altar'
-        },
-        {
-            title: 'Ligar TV',
-        },
-        {
-            title: 'Confirmar sequência de louvores',
-        },
-        {
-            title: 'Verificar conexão com internet',
-        },
-        {
-            title: 'Abrir OBS',
-        },
-        {
-            title: 'Abrir Holyrics'
-        }
+        title: 'Ligar Projetor',
+        popover: 'Controle no altar'
+    },
+    {
+        title: 'Ligar TV',
+    },
+    {
+        title: 'Confirmar sequência de louvores',
+    },
+    {
+        title: 'Verificar conexão com internet',
+    },
+    {
+        title: 'Abrir OBS',
+    },
+    {
+        title: 'Abrir Holyrics'
+    }
     ]
 }
 
@@ -50,22 +50,48 @@ const prepararHolyrics = {
     ]
 }
 
-const data = new Date(Date.now());
-const cultoData =  data.toLocaleString().split(',')[0];
 
-const cultoTitulo = () => {
-    const day = (data.getDay() %7);
-    
-    return day === 1 ? 'Culto de Mulheres' : 
-    day === 6 ? 'Culto de Jovens' : 
-    'Culto da Família';
+const data = new Date(Date.now());
+const cultoData = data.toLocaleString().split(',')[0];
+
+const infoCulto = () => {
+    const day = moment().day();
+
+    if (day == 0)
+        return {
+            culto: 'Culto da Família',
+            horario: '18h'
+        }
+
+    if (day == 1)
+        return {
+            culto: 'Culto das Mulheres',
+            horario: '19h30'
+        }
+
+    if (day == 0)
+        return {
+            culto: 'Culto da Família',
+            horario: '20h'
+        }
+
+    if (day == 5)
+        return {
+            culto: 'Culto dos Jovens',
+            horario: '18h'
+        }
+
+    return {
+        culto: 'Sem Culto',
+        horario: ''
+    }
 }
 
 const prepararTransmissaoYt = {
     id: 'PrepararTransmissaoYt',
     todo: [
         'Abrir transmissão do Youtube',
-        'Adicionar título: ' + cultoData + ' - ' + cultoTitulo(),
+        'Adicionar título: ' + infoCulto().culto + ' - ' + infoCulto().horario,
         'Atualizar thumbnail',
         'Privacidade - Público'
     ]
@@ -73,9 +99,9 @@ const prepararTransmissaoYt = {
 
 const prepararTransmissaoFb = {
     id: 'PrepararTransmissaoFb',
-    todo: [        
+    todo: [
         'Abrir transmissão do Facebook',
-        'Adicionar título: ' + cultoData + ' - ' + cultoTitulo(),
+        'Adicionar título: ' + infoCulto().culto + ' - ' + infoCulto().horario,
         'Adicionar descrição (copiar do Youtube)',
         'Posicionar câmera em quem dará abertura'
     ]
@@ -84,28 +110,28 @@ const prepararTransmissaoFb = {
 const minutos5 = {
     id: 'CincoMinutos',
     todo: [{
-            title: 'Esmaecer para preto',
-        },
-        {
-            title: 'Iniciar Transmissão no OBS',
-        },
-        {
-            title: 'Esmarcer para iniciar o timer',
-        },
-        {
-            title: 'Verificar se transmissão iniciou',
-        },
-        {
-            title: 'Divulgar link da transmissão',
-            popover: 'Estamos Online: https://www.youtube.com/c/ibasjbv/live'
-        },
-        {
-            title: 'Liga câmera (bateria SEM escrito)',
-        },
+        title: 'Esmaecer para preto',
+    },
+    {
+        title: 'Iniciar Transmissão no OBS',
+    },
+    {
+        title: 'Esmarcer para iniciar o timer',
+    },
+    {
+        title: 'Verificar se transmissão iniciou',
+    },
+    {
+        title: 'Divulgar link da transmissão',
+        popover: 'Estamos Online: https://www.youtube.com/c/ibasjbv/live'
+    },
+    {
+        title: 'Liga câmera (bateria SEM escrito)',
+    },
 
-        {
-            title: 'Colocar a bateria inicial para carregar'
-        }
+    {
+        title: 'Colocar a bateria inicial para carregar'
+    }
     ]
 }
 
@@ -167,7 +193,7 @@ btnPararAlerta.addEventListener('click', () => {
     pararAlerta()
 })
 
-alertarAs.addEventListener('change', function() {
+alertarAs.addEventListener('change', function () {
     alertaRemovido = false;
     checklist.classList.remove('alert-hour')
 })
