@@ -72,7 +72,7 @@ const prepararTransmissaoFb = {
     id: 'PrepararTransmissaoFb',
     todo: [
         { title: 'Abrir transmissão do Facebook' },
-        { title: 'Adicionar título: ' + infoCulto().culto },
+        { title: 'Adicionar título: ' + infoCulto() },
         { title: 'Adicionar descrição (copiar do Youtube)' },
     ]
 }
@@ -145,16 +145,6 @@ selecionarTodos.forEach(checkbox => {
     })
 })
 
-selecionarTodosOsMinimizers.forEach(arrow => {
-    arrow.addEventListener('click', () => {
-        const target = arrow.dataset.target
-        const input = document.querySelector(`input[data-target="${target}"]`);
-        const isChecked = input.checked
-
-        minimizarOuMaximizarTodosDoGrupo(arrow, isChecked)
-    })
-})
-
 btnPararAlerta.addEventListener('click', () => {
     pararAlerta()
 })
@@ -210,18 +200,14 @@ function selecionarOuLimparTodosDoGrupo(e, value) {
     elements.forEach(checkbox => {
         checkbox.checked = value
     })
+
+    minimizarOuMaximizarTodosDoGrupo(e, value)
 }
 
-function minimizarOuMaximizarTodosDoGrupo(arrow, isChecked) {
-    const maximizeIcon = '↸'
-    const minimizeIcon = '↘'
-    const form = document.getElementById(arrow.dataset.target)
+function minimizarOuMaximizarTodosDoGrupo(target, isChecked) {
+    const form = document.getElementById(target.dataset.target)
 
-    if (isChecked) {
-        form.classList.add('hide-checkbox')
-        arrow.innerHTML = maximizeIcon
-    } else {
-        form.classList.remove('hide-checkbox')
-        arrow.innerHTML = minimizeIcon
-    }
+    return isChecked
+        ? form.classList.add('hide-checkbox')
+        : form.classList.remove('hide-checkbox')
 }

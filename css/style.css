@@ -13,8 +13,9 @@ h1 {
     font-weight: bold;
 }
 
-h2 {
-    font-size: 1.5rem;
+h2,
+.form-check-label span.h2 {
+    font-size: 1.3rem;
     font-weight: bold;
 }
 
@@ -42,7 +43,7 @@ h2 {
     align-items: center;
 }
 
-.hide-checkbox{
+.hide-checkbox {
     display: none;
 }
 
@@ -50,6 +51,7 @@ h2 {
     from {
         background-color: #333;
     }
+
     to {
         background-color: #D41414;
     }
