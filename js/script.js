@@ -1,166 +1,131 @@
+moment.locale('pt-br')
+
 const checklist = document.getElementById('checklist')
 const alertarAs = document.getElementById('alertarAs')
 const btnPararAlerta = document.getElementById('btnPararAlerta')
+const selecionarTodos = [...document.getElementsByClassName('select-input')]
+const selecionarTodosOsMinimizers = [...document.getElementsByClassName('minimizerMaximizer')]
 
-let alertaRemovido = false;
-moment.locale('pt-br')
+let displayTimer
+let alertaRemovido = false
+
+const infoCulto = () => {
+    const day = moment().day();
+    const today = moment().format('DD/MM/YYYY')
+
+    console.log(day)
+
+    if (day == 0 || day == 3)
+        return `Culto da Família - ${today}`
+
+    if (day == 1)
+        return `Culto das Mulheres - ${today}`
+
+    if (day == 5)
+        return `Culto dos Jovens - ${today}`
+
+    return 'Sem Culto'
+}
 
 const configInicial = {
     id: 'ConfigInicial',
-    todo: [{
-        title: 'Ligar Projetor',
-        popover: 'Controle no altar'
-    },
-    {
-        title: 'Ligar TV',
-    },
-    {
-        title: 'Confirmar sequência de louvores',
-    },
-    {
-        title: 'Verificar conexão com internet',
-    },
-    {
-        title: 'Abrir OBS',
-    },
-    {
-        title: 'Abrir Holyrics'
-    }
+    todo: [
+        { title: 'Ligar Projetor' },
+        { title: 'Ligar TV' },
+        { title: 'Confirmar sequência de louvores' },
+        { title: 'Verificar conexão com internet' },
+        { title: 'Abrir OBS' },
+        { title: 'Abrir Holyrics' }
     ]
 }
 
 const prepararOBS = {
     id: 'PrepararOBS',
     todo: [
-        'Canal Captura de Entrada de Áudio',
-        'Projetar tela do OBS',
-        'Atualizar cache do Holyrics',
-        'Atualizar cache de Imagem'
+        { title: 'Canal Captura de Entrada de Áudio' },
+        { title: 'Projetar tela do OBS' },
+        { title: 'Atualizar cache do Holyrics' },
+        { title: 'Atualizar cache de Imagem' },
     ]
 }
 
 const prepararHolyrics = {
     id: 'PrepararHolyrics',
     todo: [
-        'Versículo',
-        'Louvores (Caso não tenha o louvor, pesquisar com Ctrl + Shift + H)',
-        'Louvores com até 3 linhas',
-        'Checar se louvores é exibido',
-        'Flyers/Vídeos'
+        { title: 'Versículo' },
+        { title: 'Louvores (Caso não tenha o louvor, pesquisar com Ctrl + Shift + H)' },
+        { title: 'Louvores com até 3 linhas' },
+        { title: 'Checar se louvores é exibido' },
+        { title: 'Flyers/Vídeos' }
     ]
-}
-
-const infoCulto = () => {
-    const day = moment().day();
-
-    if (day == 0)
-        return {
-            culto: 'Culto da Família',
-            horario: '18h'
-        }
-
-    if (day == 1)
-        return {
-            culto: 'Culto das Mulheres',
-            horario: '19h30'
-        }
-
-    if (day == 0)
-        return {
-            culto: 'Culto da Família',
-            horario: '20h'
-        }
-
-    if (day == 5)
-        return {
-            culto: 'Culto dos Jovens',
-            horario: '18h'
-        }
-
-    return {
-        culto: 'Sem Culto',
-        horario: ''
-    }
 }
 
 const prepararTransmissaoYt = {
     id: 'PrepararTransmissaoYt',
     todo: [
-        'Abrir transmissão do Youtube',
-        'Adicionar título: ' + infoCulto().culto + ' - ' + infoCulto().horario,
-        'Atualizar thumbnail',
-        'Privacidade - Público'
+        { title: 'Abrir transmissão do Youtube' },
+        { title: 'Adicionar título: ' + infoCulto() },
+        { title: 'Atualizar thumbnail' },
+        { title: 'Privacidade - Público' }
     ]
 }
 
 const prepararTransmissaoFb = {
     id: 'PrepararTransmissaoFb',
     todo: [
-        'Abrir transmissão do Facebook',
-        'Adicionar título: ' + infoCulto().culto + ' - ' + infoCulto().horario,
-        'Adicionar descrição (copiar do Youtube)',
-        'Posicionar câmera em quem dará abertura'
+        { title: 'Abrir transmissão do Facebook' },
+        { title: 'Adicionar título: ' + infoCulto().culto },
+        { title: 'Adicionar descrição (copiar do Youtube)' },
     ]
 }
 
 const minutos5 = {
     id: 'CincoMinutos',
-    todo: [{
-        title: 'Esmaecer para preto',
-    },
-    {
-        title: 'Iniciar Transmissão no OBS',
-    },
-    {
-        title: 'Esmarcer para iniciar o timer',
-    },
-    {
-        title: 'Verificar se transmissão iniciou',
-    },
-    {
-        title: 'Divulgar link da transmissão',
-        popover: 'Estamos Online: https://www.youtube.com/c/ibasjbv/live'
-    },
-    {
-        title: 'Liga câmera (bateria SEM escrito)',
-    },
-
-    {
-        title: 'Colocar a bateria inicial para carregar'
-    }
+    todo: [
+        { title: 'Posicionar câmera em quem dará abertura' },
+        { title: 'Esmaecer para preto' },
+        { title: 'Iniciar Transmissão no OBS' },
+        { title: 'Esmarcer para iniciar o timer' },
+        { title: 'Verificar se transmissão iniciou' },
+        { title: 'Divulgar link da transmissão' },
+        { title: 'Liga câmera (bateria SEM escrito)' },
+        { title: 'Colocar a bateria inicial para carregar' }
     ]
 }
 
 const abertura = {
     id: 'Abertura',
     todo: [
-        'Exibir o nome do pregador por 30s',
-        'Verificar qualidade da transmissão'
+        { title: 'Exibir o nome do pregador por 30s' },
+        { title: 'Verificar qualidade da transmissão' }
     ]
 }
 
 const dizimo = {
     id: 'Dizimo',
     todo: [
-        'Ao iniciar louvor, exibir dados bancários',
-        'Após oração, remover dados bancários'
+        { title: 'Ao iniciar louvor, exibir dados bancários' },
+        { title: 'Após oração, remover dados bancários' }
     ]
 }
 
 const encerrarTransmissao = {
     id: 'EncerrarTransmissao',
     todo: [
-        'Esmaecer para preto',
-        'Interromper transmissão no OBS',
-        'Encerrar transmissão no Youtube',
-        'Desligar câmera',
-        'Coloca bateria para carregar',
-        'Remover louvores do favoritos',
-        'Remover versículos do favoritos',
-        'Fechar Holyrics', 'Fechar OBS',
-        'Fechar Youtube'
+        { title: 'Esmaecer para preto' },
+        { title: 'Interromper transmissão no OBS' },
+        { title: 'Encerrar transmissão no Youtube' },
+        { title: 'Desligar câmera' },
+        { title: 'Coloca bateria para carregar' },
+        { title: 'Remover louvores do favoritos' },
+        { title: 'Remover versículos do favoritos' },
+        { title: 'Fechar Holyrics' },
+        { title: 'Fechar OBS' },
+        { title: 'Fechar Youtube' }
     ]
 }
+
+
 
 const todos = [
     configInicial,
@@ -176,7 +141,6 @@ const todos = [
 
 todos.forEach(item => renderizarItemDoChecklist(item))
 
-const selecionarTodos = [...document.getElementsByClassName('select-input')]
 selecionarTodos.forEach(checkbox => {
     checkbox.addEventListener('click', () => {
         checkbox.checked ?
@@ -185,16 +149,26 @@ selecionarTodos.forEach(checkbox => {
     })
 })
 
+selecionarTodosOsMinimizers.forEach(arrow => {
+    arrow.addEventListener('click', () => {
+        const target = arrow.dataset.target
+        const input = document.querySelector(`input[data-target="${target}"]`);
+        const isChecked = input.checked
+
+        minimizarOuMaximizarTodosDoGrupo(arrow, isChecked)
+    })
+})
+
 btnPararAlerta.addEventListener('click', () => {
     pararAlerta()
 })
 
 alertarAs.addEventListener('change', function () {
-    alertaRemovido = false;
+    alertaRemovido = false; // alterar a variável para alertaEstaAtivo
     checklist.classList.remove('alert-hour')
 })
 
-const displayTimer = setInterval(() => {
+displayTimer = setInterval(() => {
     hoje.innerHTML = moment().format('LL');
     timer.innerHTML = moment().format('HH:mm:ss');
     verificarEAplicarAlerta()
@@ -205,30 +179,16 @@ function renderizarItemDoChecklist(obj) {
 
     obj.todo.forEach(item => element.innerHTML += `
         <div class="form-check check-all">
-            ${renderizarTitle(item)}
-            ${renderizarPopover(item)}
+            	<label class="form-check-label">
+            		<input class="form-check-input" type="checkbox">  
+            		${item.title}
+        	</label>
         </div>`)
 }
 
-function renderizarTitle(item) {
-    return `<label class="form-check-label">
-            <input class="form-check-input" type="checkbox">  
-            ${item.title ? item.title : item}
-        </label>`
-}
-
-function renderizarPopover(item) {
-    return item.popover ? `
-        <i class="fa-solid fa-link"
-            data-bs-toggle="popover" 
-            data-bs-content="${item.popover}">
-        </i>` :
-        ''
-}
-
 function verificarEAplicarAlerta() {
-    let horarioAtual = moment().format('HH:mm')
-    let horarioDoAlerta = alertarAs.value
+    const horarioAtual = moment().format('HH:mm')
+    const horarioDoAlerta = alertarAs.value
 
     if (horarioDoAlerta == '')
         return false
@@ -255,17 +215,6 @@ function selecionarOuLimparTodosDoGrupo(e, value) {
         checkbox.checked = value
     })
 }
-
-const selecionarTodosOsMinimizers = [...document.getElementsByClassName('minimizerMaximizer')]
-selecionarTodosOsMinimizers.forEach(arrow => {
-    arrow.addEventListener('click', () => {
-        const target = arrow.dataset.target
-        const input = document.querySelector(`input[data-target="${target}"]`);
-        const isChecked = input.checked
-
-        minimizarOuMaximizarTodosDoGrupo(arrow, isChecked)
-    })
-})
 
 function minimizarOuMaximizarTodosDoGrupo(arrow, isChecked) {
     const maximizeIcon = '↸'
