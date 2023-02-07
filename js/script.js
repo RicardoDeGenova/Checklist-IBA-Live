@@ -13,8 +13,6 @@ const infoCulto = () => {
     const day = moment().day();
     const today = moment().format('DD/MM/YYYY')
 
-    console.log(day)
-
     if (day == 0 || day == 3)
         return `Culto da Família - ${today}`
 
@@ -125,8 +123,6 @@ const encerrarTransmissao = {
     ]
 }
 
-
-
 const todos = [
     configInicial,
     prepararOBS,
@@ -164,7 +160,7 @@ btnPararAlerta.addEventListener('click', () => {
 })
 
 alertarAs.addEventListener('change', function () {
-    alertaRemovido = false; // alterar a variável para alertaEstaAtivo
+    alertaRemovido = false;
     checklist.classList.remove('alert-hour')
 })
 
