@@ -109,8 +109,8 @@ const dizimo = {
 const duranteCulto = {
     id: 'duranteCulto',
     todo: [
-        { title: 'Rodar banner de \'Redes Sociais\' no OBS' },
-        { title: 'Exibir o nome do pregador por 30s' }
+        { title: 'Exibir o nome do pregador por 30s' },
+        { title: 'Rodar banner de \'Redes Sociais\' no OBS' }
     ]
 }
 
@@ -137,6 +137,7 @@ const todos = [
     minutos5,
     abertura,
     dizimo,
+    duranteCulto,
     encerrarTransmissao
 ]
 
