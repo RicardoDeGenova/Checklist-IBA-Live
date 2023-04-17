@@ -30,7 +30,6 @@ const configInicial = {
     todo: [
         { title: 'Ligar Projetor' },
         { title: 'Ligar TV' },
-        { title: 'Confirmar sequência de louvores' },
         { title: 'Verificar conexão com internet' },
         { title: 'Abrir OBS' },
         { title: 'Abrir Holyrics' }
@@ -40,10 +39,11 @@ const configInicial = {
 const prepararOBS = {
     id: 'PrepararOBS',
     todo: [
-        { title: 'Canal Captura de Entrada de Áudio' },
+        { title: 'Checar se som chega no OBS (ver entrada de audio em \'Audio Mixer\')' },
         { title: 'Projetar tela do OBS' },
-        { title: 'Atualizar cache do Holyrics' },
-        { title: 'Atualizar cache de Imagem' },
+        { title: 'Atualizar cache do Holyrics Biblia' },
+        { title: 'Atualizar cache do Holyrics Louvor' },
+        { title: 'Atualizar cache de Holyrics Imagem' },
     ]
 }
 
@@ -86,8 +86,7 @@ const minutos5 = {
         { title: 'Esmarcer para iniciar o timer' },
         { title: 'Verificar se transmissão iniciou' },
         { title: 'Divulgar link da transmissão' },
-        { title: 'Liga câmera (bateria SEM escrito)' },
-        { title: 'Colocar a bateria inicial para carregar' }
+        { title: 'Liga câmera (conectar fonte)' },
     ]
 }
 
@@ -107,15 +106,21 @@ const dizimo = {
     ]
 }
 
+const duranteCulto = {
+    id: 'duranteCulto',
+    todo: [
+        { title: 'Rodar banner de \'Redes Sociais\' no OBS' },
+        { title: 'Exibir o nome do pregador por 30s' }
+    ]
+}
+
 const encerrarTransmissao = {
     id: 'EncerrarTransmissao',
     todo: [
         { title: 'Esmaecer para preto' },
         { title: 'Interromper transmissão no OBS' },
         { title: 'Encerrar transmissão no Youtube' },
-        { title: 'Desligar câmera' },
-        { title: 'Coloca bateria para carregar' },
-        { title: 'Remover louvores do favoritos' },
+        { title: 'Desligar câmera e desconectar fonte' },
         { title: 'Remover versículos do favoritos' },
         { title: 'Fechar Holyrics' },
         { title: 'Fechar OBS' },
