@@ -19,7 +19,7 @@ const infoCulto = () => {
     if (day == 1)
         return `Culto das Mulheres - ${today}`
 
-    if (day == 5)
+    if (day == 6)
         return `Culto dos Jovens - ${today}`
 
     return 'Sem Culto'
