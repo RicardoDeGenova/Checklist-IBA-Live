@@ -25,6 +25,15 @@ const infoCulto = () => {
     return 'Sem Culto'
 }
 
+const privacidadeCulto = () => {
+    const day = moment().day();
+    
+    if (day == 1)
+        return 'Não Listado'
+
+    return 'Público'
+}
+
 const configInicial = {
     id: 'ConfigInicial',
     todo: [
@@ -64,7 +73,7 @@ const prepararTransmissaoYt = {
         { title: 'Abrir transmissão do Youtube' },
         { title: 'Adicionar título: ' + infoCulto() },
         { title: 'Atualizar thumbnail' },
-        { title: 'Privacidade - Público' }
+        { title: 'Privacidade - ' + privacidadeCulto() }
     ]
 }
 
