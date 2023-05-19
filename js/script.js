@@ -27,11 +27,10 @@ const infoCulto = () => {
 
 const privacidadeCulto = () => {
     const day = moment().day();
-    
-    if (day == 1)
-        return 'Não Listado'
 
-    return 'Público'
+    return day == 1
+        ? 'Não Listado'
+        : 'Público'
 }
 
 const configInicial = {
