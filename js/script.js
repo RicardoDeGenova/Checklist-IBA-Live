@@ -38,6 +38,7 @@ const configInicial = {
     todo: [
         { title: 'Ligar Projetor' },
         { title: 'Ligar TV' },
+        { title: 'Ligar câmera ' },
         { title: 'Verificar conexão com internet' },
         { title: 'Abrir OBS' },
         { title: 'Abrir Holyrics' }
@@ -61,7 +62,7 @@ const prepararHolyrics = {
         { title: 'Versículo' },
         { title: 'Louvores (Caso não tenha o louvor, pesquisar com Ctrl + Shift + H)' },
         { title: 'Louvores com até 3 linhas' },
-        { title: 'Checar se louvores é exibido' },
+        { title: 'Checar se louvor é exibido' },
         { title: 'Flyers/Vídeos' }
     ]
 }
@@ -91,10 +92,10 @@ const minutos5 = {
         { title: 'Posicionar câmera em quem dará abertura' },
         { title: 'Esmaecer para preto' },
         { title: 'Iniciar Transmissão no OBS' },
-        { title: 'Esmarcer para iniciar o timer' },
+        { title: 'Esmaecer para iniciar o timer' },
         { title: 'Verificar se transmissão iniciou' },
         { title: 'Divulgar link da transmissão' },
-        { title: 'Liga câmera (conectar fonte)' },
+
     ]
 }
 
@@ -132,7 +133,7 @@ const encerrarTransmissao = {
         { title: 'Remover versículos do favoritos' },
         { title: 'Fechar Holyrics' },
         { title: 'Fechar OBS' },
-        { title: 'Fechar Youtube' }
+        { title: 'Fechar Youtube' },
     ]
 }
 
