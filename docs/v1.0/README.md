@@ -127,19 +127,19 @@ Salvar e sair ao terminar:
 ## 2.5. Verificar se flyers solicitados estão presentes
 
 <video width="1080" loop autoplay muted>
-<source src="./_media/2-5-Verificar-flyers-solicitados.mov" type="video/mp4">
+<source src="/docs/v2.0/_media/2-5-Verificar-flyers-solicitados.mov" type="video/mp4">
 </video>
 
 ### 2.5.1. Adicionar flyers ao holyrics
 
 <video width="1080" loop autoplay muted>
-<source src="./_media/2-5-1-Copiar-flyers-holyrics.mov" type="video/mp4">
+<source src="/docs/v2.0/_media/2-5-1-Copiar-flyers-holyrics.mov" type="video/mp4">
 </video>
 
 ### 2.5.2. Renomear flyers
 
 <video width="1080" loop autoplay muted>
-<source src="./_media/2-5-2-Renomear-flyers.mov" type="video/mp4">
+<source src="/docs/v2.0/_media/2-5-2-Renomear-flyers.mov" type="video/mp4">
 </video>
 
 ---
@@ -215,19 +215,19 @@ Escolher miniatura no PC
 ## 5.2. Mudar para cena 'Início' para iniciar a contagem regressiva
 
 <video width="1080" loop autoplay muted>
-<source src="./_media/5-2-cena-inicio.mov" type="video/mp4">
+<source src="/docs/v2.0/_media/5-2-cena-inicio.mov" type="video/mp4">
 </video>
 
 ## 5.3. Iniciar Transmissão no OBS
 
 <video width="1080" loop autoplay muted>
-<source src="./_media/5-3-transmissao-obs.mov" type="video/mp4">
+<source src="/docs/v2.0/_media/5-3-transmissao-obs.mov" type="video/mp4">
 </video>
 
 ## 5.4. Verificar se transmissão iniciou
 
 <video width="1080" loop autoplay muted>
-<source src="./_media/5-4-verificar-transmissao-iniciada.mov" type="video/mp4">
+<source src="/docs/v2.0/_media/5-4-verificar-transmissao-iniciada.mov" type="video/mp4">
 </video>
 
 ## 5.5. Divulgar link da transmissão
@@ -288,7 +288,7 @@ Ajustar a câmera para que as informações da conta bancária não sobreponha o
 ## 8.1. Rodar vídeo redes sociais
 
 <video width="1080" loop autoplay muted>
-<source src="./_media/8-1-Redes-sociais.mov" type="video/mp4">
+<source src="/docs/v2.0/_media/8-1-Redes-sociais.mov" type="video/mp4">
 </video>
 ---
 
@@ -313,5 +313,5 @@ Ajustar a câmera para que as informações da conta bancária não sobreponha o
 ## 9.6. Remover versículos dos favoritos
 
 <video width="1080" loop autoplay muted>
-<source src="./_media/9-6-limpar-favoritos.mov" type="video/mp4">
+<source src="/docs/v2.0/_media/9-6-limpar-favoritos.mov" type="video/mp4">
 </video>
